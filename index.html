@@ -2,133 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Intercom Test Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Doggo Treats — Chat with Us!</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      max-width: 600px;
-      margin: auto;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff9f0;
+      margin: 0;
+      padding: 0;
+      color: #3a3a3a;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    h1 {
-      color: #2d2d2d;
+    header {
+      background-color: #ff9f1c;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+      flex-grow: 1;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #ff6f00;
+      margin-bottom: 0.5em;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-top: 0;
+      margin-bottom: 1.5em;
+    }
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
     }
     button {
-      margin-top: 10px;
-      margin-right: 10px;
-      padding: 10px 15px;
+      background-color: #ff9f1c;
       border: none;
-      background-color: #007bff;
+      border-radius: 25px;
       color: white;
-      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 12px 30px;
       cursor: pointer;
+      box-shadow: 0 5px 10px rgba(255, 159, 28, 0.5);
+      transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #0056b3;
+      background-color: #ff6f00;
     }
-    #status {
-      margin-top: 20px;
-      font-weight: bold;
+    footer {
+      text-align: center;
+      margin: 20px 0 40px;
+      color: #888;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <h1>🧪 VinnyLand</h1>
-  <p>This test page lets you toggle between visitor and logged-in user to test Intercom Messenger behavior.</p>
 
-  <div>
-    <button onclick="bootVisitor()">Load as Visitor</button>
-    <button onclick="bootUser()">Log In as Test User</button>
-    <button onclick="shutdownIntercom()">Log Out / Shutdown</button>
-    <button onclick="sendEvent()">Send Custom Event</button>
-  </div>
+  <header>Doggo Treats</header>
 
-  <div id="status">Status: Not loaded</div>
+  <main>
+    <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=600&q=80" alt="Happy dog with treats" />
+    <h2>Welcome to Doggo Treats!</h2>
+    <p>Your one-stop shop for the yummiest dog treats around. Got questions? Just chat with us using the messenger in the corner!</p>
 
+    <div class="button-group">
+      <button onclick="alert('Showing our menu! (Placeholder)')">Our Menu</button>
+      <button onclick="alert('Ordering now! (Placeholder)')">Order Now</button>
+      <button onclick="window.Intercom('show');">Contact Support</button>
+    </div>
+  </main>
+
+  <footer>© 2025 Doggo Treats</footer>
+
+  <!-- Intercom Messenger -->
   <script>
-    const appId = "ex23qz7s";
-    const apiBase = "https://api-iam.intercom.io";
-
-    function bootVisitor() {
-      window.Intercom('shutdown'); // Reset before boot
-      window.intercomSettings = {
-        api_base: apiBase,
-        app_id: appId
-      };
-      Intercom('boot', window.intercomSettings);
-      updateStatus("Visitor session loaded (anonymous)");
-    }
-
-    function bootUser() {
-      window.Intercom('shutdown'); // Reset before boot
-      const user = {
-        id: "user_1234",
-        name: "Karla Example",
-        email: "karla@example.com",
-        createdAt: Math.floor(Date.now() / 1000) - 86400 // 1 day ago
-      };
-
-      window.intercomSettings = {
-        api_base: apiBase,
-        app_id: appId,
-        user_id: user.id,
-        name: user.name,
-        email: user.email,
-        created_at: user.createdAt
-      };
-
-      Intercom('boot', window.intercomSettings);
-      updateStatus(`Logged in as ${user.email}`);
-    }
-
-    function shutdownIntercom() {
-      window.Intercom('shutdown');
-      updateStatus("Intercom shutdown (logged out)");
-    }
-
-    function sendEvent() {
-      Intercom('trackEvent', 'demo_event_clicked', {
-        clicked_at: new Date().toISOString(),
-        plan: 'test'
-      });
-      alert("Sent custom event: 'demo_event_clicked'");
-    }
-
-    function updateStatus(message) {
-      document.getElementById("status").innerText = `Status: ${message}`;
-    }
-
-    // Load Intercom script
-    (function(){
-      var w = window;
-      var ic = w.Intercom;
-      if (typeof ic === "function") {
-        ic('reattach_activator');
-        ic('update', w.intercomSettings);
-      } else {
-        var d = document;
-        var i = function() { i.c(arguments); };
-        i.q = [];
-        i.c = function(args) { i.q.push(args); };
-        w.Intercom = i;
-        var l = function() {
-          var s = d.createElement('script');
-          s.type = 'text/javascript';
-          s.async = true;
-          s.src = 'https://widget.intercom.io/widget/ex23qz7s';
-          var x = d.getElementsByTagName('script')[0];
-          x.parentNode.insertBefore(s, x);
-        };
-        if (document.readyState === 'complete') {
-          l();
-        } else if (w.attachEvent) {
-          w.attachEvent('onload', l);
-        } else {
-          w.addEventListener('load', l, false);
-        }
-      }
-    })();
+    window.intercomSettings = {
+      app_id: "ex23qz7s"
+    };
   </script>
+
+  <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ex23qz7s';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+
 </body>
 </html>
