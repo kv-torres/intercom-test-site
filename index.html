@@ -3,103 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pitbull Pals — Chat & Explore</title>
+  <title>Welcome to Pit Mode 🐾</title>
   <style>
     body {
-      margin: 0; font-family: 'Segoe UI', sans-serif;
-      background: #e0f0ff; color: #003366;
-      display: flex; flex-direction: column; min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0f0ff, #b3d9ff);
+      color: #003366;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
     }
-    header {
-      background: linear-gradient(90deg, #005f99, #007acc);
-      color: #d0eaff; text-align: center;
-      padding: 1.5rem 1rem;
-      font-size: 2.4rem; font-weight: 700; letter-spacing: 1.5px;
-      display: flex; align-items: center; justify-content: center;
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
     }
-    header img {
-      width: 50px; margin-right: 15px;
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: #004080;
     }
-    main {
-      max-width: 900px; margin: 2rem auto 3rem; padding: 0 1rem; flex-grow:1;
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
     }
-    h2 {
-      text-align: center; margin-bottom: 0.3rem; color: #004080;
+    .buttons button {
+      background: #007acc;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
-    p.intro {
-      text-align: center; max-width:600px;
-      margin:0 auto 2rem; font-size:1.15rem; color:#005b99;
+    .buttons button:hover {
+      background: #005f99;
     }
-    .button-group {
-      display:flex; justify-content:center;
-      gap:20px; margin-bottom:2.5rem; flex-wrap:wrap;
-    }
-    button {
-      background: linear-gradient(135deg, #007acc, #004c99);
-      border:none; color:#d0eaff; font-size:1.15rem;
-      padding:14px 30px; border-radius:30px;
-      cursor:pointer; box-shadow:0 5px 12px rgba(0,76,153,0.6);
-      font-weight:600;transition:background 0.3s ease;
-      min-width:110px;
-    }
-    button:hover {
-      background: linear-gradient(135deg, #004c99, #003366);
-    }
-    .gallery {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:16px;
-    }
-    .gallery-item {
-      background:white;
-      border-radius:14px;
-      box-shadow:0 6px 14px rgba(0,76,153,0.15);
-      overflow:hidden;
-      cursor:pointer;
-      display:flex;flex-direction:column;
-      transition:transform 0.25s ease,box-shadow 0.25s ease;
-    }
-    .gallery-item:hover {
-      transform:scale(1.04);
-      box-shadow:0 10px 25px rgba(0,76,153,0.3);
-    }
-    .gallery-item img {
-      width:100%; height:160px; object-fit:cover;
-    }
-    .caption {
-      padding:0.75rem 1rem;
-      text-align:center; font-weight:600;
-      color:#005b99; background:#cce6ff;
-      flex-grow:1;
-      display:flex; align-items:center; justify-content:center;
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
     }
     footer {
-      text-align:center; padding:1rem 0 2rem;
-      color:#004080; font-size:0.9rem;
+      margin-top: auto;
+      font-size: 0.9rem;
+      color: #666;
+      padding: 2rem 0 1rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <img src="https://i.imgur.com/6bKfz9k.png" alt="Pitbull ears logo" />
-    Pitbull Pals
-  </header>
+  <div class="card">
+    <h1>Welcome to Pit Mode 🐶</h1>
+    <p>Click a mode below to test Intercom behavior.</p>
 
-  <main>
-    <h2>Welcome to Pitbull Pals!</h2>
-    <p class="intro">Explore our pitbull gallery, or chat with us anytime using the messenger in the corner.</p>
-
-    <div class="button-group">
-      <button onclick="alert('Visitor Mode Activated!')">Visitor</button>
-      <button onclick="alert('User Mode Activated!')">User</button>
-      <button onclick="alert('Showing Events (placeholder)')">Events</button>
+    <div class="buttons">
+      <button onclick="alert('You are now in Visitor mode')">Visitor</button>
+      <button onclick="alert('User mode enabled')">User</button>
+      <button onclick="alert('Loading Events...')">Events</button>
     </div>
 
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="https://cdn.pixabay.com/photo/2016/02/19/11/33/pitbull-1209342_1280.jpg" alt="Pitbull 1" />
-        <div class="caption">Playful Pup</div>
-      </div>
-      <div class="gallery-item">
-        <img src="https://cdn
+    <p>Use the Intercom chat bubble in the corner to test Messenger.</p>
+  </div>
+
+  <footer>
+    Built for Intercom testing · © 2025
+  </footer>
+
+  <!-- Intercom Messenger Script -->
+  <script>
+    window.intercomSettings = { app_id: "ex23qz7s" };
+  </script>
+  <script>
+    (function(){
+      var w=window;var ic=w.Intercom;
+      if(typeof ic==="function"){
+        ic('reattach_activator');
+        ic('update',w.intercomSettings);
+      } else {
+        var d=document;var i=function(){i.c(arguments)};i.q=[];
+        i.c=function(args){i.q.push(args)};
+        w.Intercom=i;
+        var l=function(){
+          var s=d.createElement('script');
+          s.type='text/javascript';s.async=true;
+          s.src='https://widget.intercom.io/widget/ex23qz7s';
+          var x=d.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s,x);
+        };
+        if(document.readyState==='complete'){l();}
+        else if(w.attachEvent){w.attachEvent('onload',l);}
+        else{w.addEventListener('load',l,false);}
+      }
+    })();
+  </script>
+
+</body>
+</html>
