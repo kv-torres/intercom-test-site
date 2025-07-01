@@ -62,3 +62,34 @@ function triggerEvent() {
 
 // Load Visitor by default
 window.addEventListener("load", loadVisitor);
+
+function bootFromForm() {
+  const app_id = document.getElementById("form_app_id").value;
+  const user_id = document.getElementById("form_user_id").value;
+  const email = document.getElementById("form_email").value;
+
+  const settings = {
+    app_id,
+    api_base: "https://api-iam.intercom.io"
+  };
+
+  if (user_id) settings.user_id = user_id;
+  if (email) settings.email = email;
+
+  bootIntercom(settings);
+}
+
+function updateFromForm() {
+  const user_id = document.getElementById("form_user_id").value;
+  const email = document.getElementById("form_email").value;
+
+  if (window.Intercom) {
+    Intercom('update', {
+      user_id,
+      email
+    });
+    alert("User updated via Intercom!");
+  } else {
+    alert("Intercom is not loaded yet. Try booting first.");
+  }
+}
