@@ -3,98 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Doggo Treats — Chat with Us!</title>
+  <title>Pitbull Pals — Chat with Us!</title>
   <style>
     body {
+      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #fff9f0;
-      margin: 0;
-      padding: 0;
-      color: #3a3a3a;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      color: #333;
+      line-height: 1.6;
     }
     header {
       background-color: #ff9f1c;
-      padding: 20px;
-      text-align: center;
       color: white;
-      font-size: 2rem;
-      font-weight: bold;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
       letter-spacing: 2px;
     }
     main {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 0 20px;
-      text-align: center;
-      flex-grow: 1;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
     }
     h2 {
       color: #ff6f00;
-      margin-bottom: 0.5em;
+      margin-bottom: 1rem;
+      text-align: center;
     }
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-top: 0;
-      margin-bottom: 1.5em;
+    p.intro {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+      text-align: center;
+      color: #555;
     }
-    .button-group {
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .gallery-item {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(255,159,28,0.2);
+      overflow: hidden;
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-    button {
-      background-color: #ff9f1c;
-      border: none;
-      border-radius: 25px;
-      color: white;
-      font-weight: bold;
-      font-size: 1.1rem;
-      padding: 12px 30px;
+      flex-direction: column;
       cursor: pointer;
-      box-shadow: 0 5px 10px rgba(255, 159, 28, 0.5);
-      transition: background-color 0.3s ease;
+      transition: transform 0.2s ease;
     }
-    button:hover {
-      background-color: #ff6f00;
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 12px rgba(255,159,28,0.4);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    .caption {
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      color: #ff6f00;
+      text-align: center;
+      background: #fff3e0;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     footer {
       text-align: center;
-      margin: 20px 0 40px;
-      color: #888;
+      color: #999;
+      margin-bottom: 2rem;
       font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
 
-  <header>Doggo Treats</header>
+  <header>Pitbull Pals</header>
 
   <main>
-    <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=600&q=80" alt="Happy dog with treats" />
-    <h2>Welcome to Doggo Treats!</h2>
-    <p>Your one-stop shop for the yummiest dog treats around. Got questions? Just chat with us using the messenger in the corner!</p>
+    <h2>Welcome to the Pitbull Pals Gallery!</h2>
+    <p class="intro">Check out our favorite pitbull pals — happy, playful, and full of love! Chat with us anytime using the messenger in the corner.</p>
 
-    <div class="button-group">
-      <button onclick="alert('Showing our menu! (Placeholder)')">Our Menu</button>
-      <button onclick="alert('Ordering now! (Placeholder)')">Order Now</button>
-      <button onclick="window.Intercom('show');">Contact Support</button>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=400&q=80" alt="Pitbull playing outside" />
+        <div class="caption">Playful Pup</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=400&q=80" alt="Pitbull close-up" />
+        <div class="caption">Friendly Face</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=400&q=80" alt="Pitbull laying down" />
+        <div class="caption">Chill Buddy</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=400&q=80" alt="Happy pitbull" />
+        <div class="caption">Happy Smile</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=400&q=80" alt="Pitbull puppy" />
+        <div class="caption">Puppy Love</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=400&q=80" alt="Dog running in field" />
+        <div class="caption">Running Free</div>
+      </div>
     </div>
   </main>
 
-  <footer>© 2025 Doggo Treats</footer>
+  <footer>© 2025 Pitbull Pals</footer>
 
   <!-- Intercom Messenger -->
   <script>
