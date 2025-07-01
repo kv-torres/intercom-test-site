@@ -68,6 +68,27 @@
   <h1>Pit Mode 🐾</h1>
   <p>Click a button below to test how Intercom behaves for each mode.</p>
 
+  <form id="intercomForm" style="margin-top: 2rem; text-align: center;">
+  <label>
+    App ID:
+    <input type="text" id="form_app_id" value="ex23qz7s" />
+  </label>
+  <br /><br />
+  <label>
+    User ID:
+    <input type="text" id="form_user_id" />
+  </label>
+  <br /><br />
+  <label>
+    Email:
+    <input type="email" id="form_email" />
+  </label>
+  <br /><br />
+  <button type="button" onclick="bootFromForm()">Boot</button>
+  <button type="button" onclick="updateFromForm()">Update</button>
+  <button type="button" onclick="shutdown()">Shutdown</button>
+</form>
+
   <div class="buttons">
     <button onclick="loadVisitor()">Visitor</button>
     <button onclick="loadUser()">User</button>
