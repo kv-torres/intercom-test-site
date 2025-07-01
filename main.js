@@ -1,5 +1,7 @@
 function bootIntercom(settings) {
-  if (window.Intercom) {
+  console.log("Booting Intercom with settings:", settings); // Log settings for debugging
+
+  if (window.Intercom && typeof window.Intercom === 'function') {
     Intercom('shutdown');
     setTimeout(() => {
       window.intercomSettings = settings;
@@ -19,13 +21,106 @@ function bootIntercom(settings) {
         var s = d.createElement('script');
         s.type = 'text/javascript';
         s.async = true;
-        s.src = 'https://widget.intercom.io/widget/' + settings.app_id; // ✅ dynamic app_id
+        s.src = 'https://widget.intercom.io/widget/' + settings.app_id;
+        s.onerror = function() {
+          console.error("Failed to load Intercom script for app_id:", settings.app_id);
+        };
         var x = d.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
       };
-      if (document.readyState === 'complete') { l(); }
-      else if (w.attachEvent) { w.attachEvent('onload', l); }
-      else { w.addEventListener('load', l, false); }
+      if (document.readyState === 'complete') {
+        l();
+      } else if (w.attachEvent) {
+        w.attachEvent('onload', l);
+      } else {
+        w.addEventListener('load', l, false);
+      }
     })();
+  }
+}
+
+function loadVisitor() {
+  bootIntercom({
+    app_id: "ex23qz7s",
+    api_base: "https://api-iam.intercom.io"
+  });
+}
+
+function loadUser() {
+  bootIntercom({
+    app_id: "ex23qz7s",
+    api_base: "https://api-iam.intercom.io",
+    user_id: "user_001",
+    name: "Karla Test User",
+    email: "karla+test@intercom.com",
+    created_at: Math.floor(Date.now() / 1000)
+  });
+}
+
+function shutdown() {
+  if (window.Intercom) {
+    Intercom('shutdown');
+    alert("Intercom shut down.");
+  }
+}
+
+function triggerEvent() {
+  if (window.Intercom) {
+    Intercom('trackEvent', 'button-clicked', {
+      source: 'Pit Mode UI'
+    });
+    alert("Sample event sent to Intercom!");
+  }
+}
+
+// Load Visitor by default
+window.addEventListener("load", loadVisitor);
+
+function bootFromForm() {
+  const app_id = document.getElementById("form_app_id").value.trim();
+  const user_id = document.getElementById("form_user_id").value.trim();
+  const email = document.getElementById("form_email").value.trim();
+
+  if (!app_id) {
+    alert("Please enter an App ID.");
+    return;
+  }
+
+  const settings = {
+    app_id,
+    api_base: "https://api-iam.intercom.io"
+  };
+
+  if (user_id) settings.user_id = user_id;
+  if (email) settings.email = email;
+
+  bootIntercom(settings);
+
+  // Show messenger after a short delay
+  setTimeout(() => {
+    if (window.Intercom) {
+      Intercom('show');
+    }
+  }, 500);
+}
+
+function updateFromForm() {
+  const user_id = document.getElementById("form_user_id").value.trim();
+  const email = document.getElementById("form_email").value.trim();
+
+  if (!user_id && !email) {
+    alert("Please enter User ID or Email to update.");
+    return;
+  }
+
+  if (window.Intercom) {
+    Intercom('update', {
+      user_id,
+      email
+    });
+    Intercom('show'); // Ensure messenger is visible
+    alert("User updated via Intercom!");
+  } else {
+    alert("Intercom is not loaded yet. Try booting first.");
   }
 }
