@@ -1,7 +1,5 @@
 function bootIntercom(settings) {
-  console.log("Booting Intercom with settings:", settings); // Log settings for debugging
-
-  if (window.Intercom && typeof window.Intercom === 'function') {
+  if (window.Intercom) {
     Intercom('shutdown');
     setTimeout(() => {
       window.intercomSettings = settings;
@@ -10,31 +8,20 @@ function bootIntercom(settings) {
   } else {
     window.intercomSettings = settings;
     (function(){
-      var w = window;
-      var ic = w.Intercom;
-      var d = document;
-      var i = function() { i.c(arguments); };
-      i.q = [];
-      i.c = function(args) { i.q.push(args); };
-      w.Intercom = i;
-      var l = function() {
-        var s = d.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'https://widget.intercom.io/widget/' + settings.app_id;
-        s.onerror = function() {
-          console.error("Failed to load Intercom script for app_id:", settings.app_id);
-        };
-        var x = d.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
+      var w=window;var ic=w.Intercom;
+      var d=document;var i=function(){i.c(arguments)};i.q=[];
+      i.c=function(args){i.q.push(args)};
+      w.Intercom=i;
+      var l=function(){
+        var s=d.createElement('script');
+        s.type='text/javascript';s.async=true;
+        s.src='https://widget.intercom.io/widget/ex23qz7s';
+        var x=d.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s,x);
       };
-      if (document.readyState === 'complete') {
-        l();
-      } else if (w.attachEvent) {
-        w.attachEvent('onload', l);
-      } else {
-        w.addEventListener('load', l, false);
-      }
+      if(document.readyState==='complete'){l();}
+      else if(w.attachEvent){w.attachEvent('onload',l);}
+      else{w.addEventListener('load',l,false);}
     })();
   }
 }
@@ -77,14 +64,9 @@ function triggerEvent() {
 window.addEventListener("load", loadVisitor);
 
 function bootFromForm() {
-  const app_id = document.getElementById("form_app_id").value.trim();
-  const user_id = document.getElementById("form_user_id").value.trim();
-  const email = document.getElementById("form_email").value.trim();
-
-  if (!app_id) {
-    alert("Please enter an App ID.");
-    return;
-  }
+  const app_id = document.getElementById("form_app_id").value;
+  const user_id = document.getElementById("form_user_id").value;
+  const email = document.getElementById("form_email").value;
 
   const settings = {
     app_id,
@@ -105,20 +87,15 @@ function bootFromForm() {
 }
 
 function updateFromForm() {
-  const user_id = document.getElementById("form_user_id").value.trim();
-  const email = document.getElementById("form_email").value.trim();
-
-  if (!user_id && !email) {
-    alert("Please enter User ID or Email to update.");
-    return;
-  }
+  const user_id = document.getElementById("form_user_id").value;
+  const email = document.getElementById("form_email").value;
 
   if (window.Intercom) {
     Intercom('update', {
       user_id,
       email
     });
-    Intercom('show'); // Ensure messenger is visible
+    Intercom('show');
     alert("User updated via Intercom!");
   } else {
     alert("Intercom is not loaded yet. Try booting first.");
