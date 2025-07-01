@@ -77,6 +77,13 @@ function bootFromForm() {
   if (email) settings.email = email;
 
   bootIntercom(settings);
+
+  // Force show Messenger after boot
+  setTimeout(() => {
+    if (window.Intercom) {
+      Intercom('show');
+    }
+  }, 500);
 }
 
 function updateFromForm() {
@@ -88,6 +95,7 @@ function updateFromForm() {
       user_id,
       email
     });
+    Intercom('show'); // Ensure it's visible
     alert("User updated via Intercom!");
   } else {
     alert("Intercom is not loaded yet. Try booting first.");
