@@ -6,15 +6,59 @@
   <title>How Long You Been Wid Her?</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    :root {
+      --accent: #e70078;
+      --accent-glow: rgba(231, 0, 120, 0.4);
+      --bg: #0a0a0a;
+      --bg-card: #141414;
+      --text: #f0f0f0;
+      --text-muted: #888;
+      --green: #00ff21;
+    }
+
     body {
-      font-family: 'Inter', sans-serif;
-      background: #fdf6f0;
-      color: #2d2d2d;
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--green);
+      color: #000;
+    }
+
+    /* --- SCROLLING BANNER --- */
+    .banner {
+      background: var(--accent);
+      color: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 10px 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .banner-track {
+      display: inline-block;
+      animation: scroll-banner 20s linear infinite;
+    }
+
+    .banner-track span {
+      padding: 0 3rem;
+    }
+
+    @keyframes scroll-banner {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     /* --- NAV --- */
@@ -23,15 +67,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.5rem 3rem;
-      background: #fff;
-      border-bottom: 1px solid #f0e6dc;
+      border-bottom: 1px solid #222;
     }
 
     .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: #c2185b;
+      font-family: 'Space Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
       letter-spacing: -0.5px;
     }
 
@@ -43,297 +86,513 @@
 
     .nav-links a {
       text-decoration: none;
-      color: #555;
-      font-weight: 500;
-      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: #c2185b; }
+    .nav-links a:hover { color: var(--green); }
 
     /* --- HERO --- */
     .hero {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 5rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
       align-items: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      background: linear-gradient(180deg, #fff 0%, #fdf6f0 100%);
     }
 
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      font-weight: 900;
-      color: #1a1a1a;
+    .hero-text h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 3.5rem;
+      font-weight: 700;
       line-height: 1.1;
-      max-width: 700px;
+      text-transform: uppercase;
     }
 
-    .hero h1 span { color: #c2185b; }
+    .hero-text h1 span {
+      color: var(--accent);
+      text-shadow: 0 0 40px var(--accent-glow);
+    }
 
-    .hero p {
+    .hero-text p {
       margin-top: 1.5rem;
-      font-size: 1.2rem;
-      color: #666;
-      max-width: 520px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
       line-height: 1.7;
+      max-width: 480px;
     }
 
-    .hero-cta {
-      margin-top: 2.5rem;
+    .hero-buttons {
+      margin-top: 2rem;
       display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .btn-primary {
-      background: #c2185b;
-      color: #fff;
-      border: none;
-      padding: 14px 32px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 50px;
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 12px;
+      border: 2px solid #222;
+      box-shadow: 0 0 60px var(--accent-glow);
+    }
+
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: linear-gradient(180deg, transparent 60%, var(--bg) 100%);
+      pointer-events: none;
+    }
+
+    /* --- BUTTONS --- */
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 0;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      transition: all 0.2s;
+      text-decoration: none;
+      border: 2px solid;
     }
 
-    .btn-primary:hover {
-      background: #a01448;
-      transform: translateY(-1px);
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
     }
 
-    .btn-secondary {
+    .btn-accent:hover {
       background: transparent;
-      color: #c2185b;
-      border: 2px solid #c2185b;
-      padding: 14px 32px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s;
+      color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
     }
 
-    .btn-secondary:hover {
-      background: #c2185b;
-      color: #fff;
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      border-color: var(--green);
     }
 
-    /* --- FEATURES --- */
+    .btn-outline:hover {
+      background: var(--green);
+      color: #000;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border-color: #333;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    /* --- FEATURES GRID --- */
+    .section-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-heading {
+      font-family: 'Space Mono', monospace;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+    }
+
     .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      padding: 4rem 3rem;
-      max-width: 1100px;
+      padding: 5rem 3rem;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    .feature-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
-      transition: transform 0.2s, box-shadow 0.2s;
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
     }
 
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid #222;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover::before { transform: scaleX(1); }
+
     .feature-card:hover {
+      border-color: #333;
       transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
 
     .feature-icon {
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
     }
 
     .feature-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
       margin-bottom: 0.75rem;
-      color: #1a1a1a;
+      text-transform: uppercase;
     }
 
     .feature-card p {
-      color: #777;
+      color: var(--text-muted);
       font-size: 0.95rem;
       line-height: 1.6;
     }
 
-    /* --- TESTIMONIAL --- */
-    .testimonial {
+    /* --- PRODUCT TOUR SECTION --- */
+    .tour-section {
+      padding: 5rem 3rem;
       text-align: center;
-      padding: 4rem 2rem;
-      background: #fff;
+      background: linear-gradient(180deg, var(--bg) 0%, #111 100%);
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
     }
 
-    .testimonial blockquote {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #1a1a1a;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.4;
+    .tour-section p {
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
     }
 
-    .testimonial cite {
-      display: block;
-      margin-top: 1.5rem;
-      font-style: normal;
-      color: #999;
-      font-size: 0.95rem;
-    }
-
-    /* --- CTA SECTION --- */
-    .cta-section {
-      text-align: center;
-      padding: 5rem 2rem;
-      background: linear-gradient(135deg, #c2185b, #e91e63);
-      color: #fff;
-    }
-
-    .cta-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .cta-section p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      margin-bottom: 2rem;
-    }
-
-    .btn-white {
-      background: #fff;
-      color: #c2185b;
-      border: none;
-      padding: 14px 32px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .btn-white:hover { transform: translateY(-2px); }
-
-    /* --- FOOTER --- */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #1a1a1a;
-      color: #888;
-      font-size: 0.85rem;
-    }
-
-    footer a { color: #c2185b; text-decoration: none; }
-
-    /* --- INTERCOM TEST PANEL (hidden by default) --- */
-    .test-panel {
-      display: none;
-      background: #1a1a1a;
-      color: #e0e0e0;
-      padding: 2rem 3rem;
-      border-top: 3px solid #c2185b;
-    }
-
-    .test-panel.open { display: block; }
-
-    .test-panel h3 {
-      color: #fff;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      font-family: 'Inter', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .test-panel-grid {
+    .tour-input-group {
       display: flex;
-      gap: 2rem;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
       flex-wrap: wrap;
-      align-items: flex-end;
     }
 
-    .test-panel label {
-      display: block;
-      font-size: 0.8rem;
-      color: #aaa;
-      margin-bottom: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .test-panel input {
-      background: #2a2a2a;
-      border: 1px solid #444;
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 0.9rem;
+    .tour-input-group input {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: var(--text);
+      padding: 12px 18px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
       width: 200px;
     }
 
-    .test-panel input:focus {
+    .tour-input-group input:focus {
       outline: none;
-      border-color: #c2185b;
+      border-color: var(--accent);
     }
 
-    .test-btn {
-      background: #333;
+    .tour-input-group input::placeholder {
+      color: #555;
+    }
+
+    /* --- QUOTE --- */
+    .quote-section {
+      padding: 5rem 3rem;
+      text-align: center;
+    }
+
+    .quote-section blockquote {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .quote-section blockquote span { color: var(--accent); }
+
+    .quote-section cite {
+      display: block;
+      margin-top: 1.5rem;
+      font-style: normal;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* --- HELP CENTER CTA --- */
+    .help-section {
+      padding: 5rem 3rem;
+      text-align: center;
+      background: var(--accent);
+    }
+
+    .help-section h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 2rem;
+      text-transform: uppercase;
       color: #fff;
-      border: 1px solid #555;
-      padding: 10px 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .help-section p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--accent);
+      border: 2px solid #fff;
+      padding: 14px 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .test-btn:hover {
-      background: #c2185b;
-      border-color: #c2185b;
+    .btn-white:hover {
+      background: transparent;
+      color: #fff;
     }
 
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 2rem 3rem;
+      border-top: 1px solid #222;
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* --- THEME PICKER --- */
+    .theme-picker {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+      z-index: 1000;
+    }
+
+    .theme-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #333;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .theme-dot:hover {
+      transform: scale(1.2);
+      border-color: #fff;
+    }
+
+    .theme-dot.active { border-color: #fff; }
+
+    /* --- TEST PANEL --- */
     .toggle-panel {
       position: fixed;
-      bottom: 80px;
+      bottom: 20px;
       left: 20px;
       background: #1a1a1a;
-      color: #888;
+      color: #555;
       border: 1px solid #333;
       padding: 8px 14px;
-      font-size: 0.75rem;
-      border-radius: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       cursor: pointer;
       z-index: 999;
       transition: all 0.2s;
     }
 
     .toggle-panel:hover {
-      background: #c2185b;
+      background: var(--accent);
       color: #fff;
-      border-color: #c2185b;
+      border-color: var(--accent);
+    }
+
+    .test-panel {
+      display: none;
+      background: #111;
+      color: #e0e0e0;
+      padding: 2rem 3rem;
+      border-top: 3px solid var(--accent);
+    }
+
+    .test-panel.open { display: block; }
+
+    .test-panel h3 {
+      color: var(--accent);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .test-panel-grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .test-panel label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: #666;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .test-panel input {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 10px 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      width: 180px;
+    }
+
+    .test-panel input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .test-btn {
+      background: #222;
+      color: #ccc;
+      border: 1px solid #444;
+      padding: 10px 18px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .test-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* --- TEXTURE OVERLAY --- */
+    .texture {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
     }
 
     /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .features { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 3rem 1.5rem;
+        text-align: center;
+      }
+      .hero-text h1 { font-size: 2.2rem; }
+      .hero-text p { max-width: 100%; }
+      .hero-buttons { justify-content: center; }
+      .hero-image { order: -1; }
+      .features-grid { grid-template-columns: 1fr; }
       nav { padding: 1rem 1.5rem; }
       .nav-links { gap: 1rem; }
-      .hero { padding: 4rem 1.5rem 3rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .section-heading { font-size: 1.4rem; }
       .test-panel-grid { flex-direction: column; }
       .test-panel input { width: 100%; }
+      .tour-input-group { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
+
+  <!-- NOISE TEXTURE OVERLAY -->
+  <div class="texture"></div>
+
+  <!-- SCROLLING BANNER -->
+  <div class="banner">
+    <div class="banner-track">
+      <span>The truth always comes out</span>
+      <span>&#10022;</span>
+      <span>How long you been wid her?</span>
+      <span>&#10022;</span>
+      <span>The math ain't mathing</span>
+      <span>&#10022;</span>
+      <span>Trust your gut</span>
+      <span>&#10022;</span>
+      <span>The truth always comes out</span>
+      <span>&#10022;</span>
+      <span>How long you been wid her?</span>
+      <span>&#10022;</span>
+      <span>The math ain't mathing</span>
+      <span>&#10022;</span>
+      <span>Trust your gut</span>
+      <span>&#10022;</span>
+    </div>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -341,63 +600,93 @@
     <ul class="nav-links">
       <li><a href="#features">How It Works</a></li>
       <li><a href="#stories">Stories</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#tour">Take a Tour</a></li>
+      <li><a href="https://help.howlongyoubeenwidher.com" target="_blank">Help Center</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <h1>How Long You Been <span>Wid Her?</span></h1>
-    <p>The place to get real about relationships, situationships, and everything in between. No judgment. Just honesty.</p>
-    <div class="hero-cta">
-      <button class="btn-primary" onclick="openMessenger()">Talk To Us</button>
-      <button class="btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Learn More</button>
+    <div class="hero-text">
+      <h1>How Long You Been <span>Wid Her?</span></h1>
+      <p>The place to get real about relationships, situationships, and everything in between. No judgment. Just honesty.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-accent" onclick="openMessenger()">Talk To Us</button>
+        <a class="btn btn-outline" href="https://help.howlongyoubeenwidher.com" target="_blank">Help Center</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/hero.png" alt="How Long You Been Wid Her?" />
     </div>
   </section>
 
   <!-- FEATURES -->
   <section class="features" id="features">
-    <div class="feature-card">
-      <div class="feature-icon">&#128172;</div>
-      <h3>Anonymous Confessions</h3>
-      <p>Share your story without the worry. Our community keeps it real and keeps it private.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">&#128338;</div>
-      <h3>Timeline Calculator</h3>
-      <p>Track the overlap. See the math. Sometimes the dates just don't add up.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">&#129505;</div>
-      <h3>Support Circle</h3>
-      <p>Connect with others who've been through it. Healing is better together.</p>
+    <div class="section-title">What We Do</div>
+    <h2 class="section-heading">Get the Answers You Deserve</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#128172;</div>
+        <h3>Anonymous Confessions</h3>
+        <p>Share your story without the worry. Our community keeps it real and keeps it private.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128338;</div>
+        <h3>Timeline Calculator</h3>
+        <p>Track the overlap. See the math. Sometimes the dates just don't add up.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#129505;</div>
+        <h3>Support Circle</h3>
+        <p>Connect with others who've been through it. Healing is better together.</p>
+      </div>
     </div>
   </section>
 
-  <!-- TESTIMONIAL -->
-  <section class="testimonial" id="stories">
-    <blockquote>"I finally got the clarity I needed. Turns out, the math wasn't mathing for a reason."</blockquote>
+  <!-- QUOTE -->
+  <section class="quote-section" id="stories">
+    <blockquote>"I finally got the clarity I needed. Turns out, <span>the math wasn't mathing</span> for a reason."</blockquote>
     <cite>&mdash; Anonymous, Member since 2024</cite>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-section" id="contact">
-    <h2>Ready to Find Out?</h2>
-    <p>Start a conversation. We're here for you.</p>
-    <button class="btn-white" onclick="openMessenger()">Chat With Us</button>
+  <!-- PRODUCT TOUR SECTION -->
+  <section class="tour-section" id="tour">
+    <div class="section-title">New Here?</div>
+    <h2 class="section-heading">Take the Tour</h2>
+    <p>Get a quick walkthrough of how everything works. We'll show you around.</p>
+    <button class="btn btn-accent" onclick="startProductTour()">Start Product Tour</button>
+    <div class="tour-input-group">
+      <input type="number" id="tour_id" placeholder="Tour ID (e.g. 12345)" />
+      <button class="btn btn-ghost" onclick="startCustomTour()">Launch Custom Tour</button>
+    </div>
+  </section>
+
+  <!-- HELP CENTER CTA -->
+  <section class="help-section">
+    <h2>Need Answers?</h2>
+    <p>Browse articles, FAQs, and guides in our Help Center.</p>
+    <a class="btn-white" href="https://help.howlongyoubeenwidher.com" target="_blank">Visit Help Center</a>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    &copy; 2025 How Long You Been Wid Her? &mdash; Built with <a href="#">love and accountability</a>.
+    &copy; 2025 How Long You Been Wid Her? &mdash; Built with <a href="#">love &amp; accountability</a>
   </footer>
 
-  <!-- INTERCOM TEST PANEL TOGGLE -->
-  <button class="toggle-panel" onclick="togglePanel()">Test Panel</button>
+  <!-- THEME PICKER -->
+  <div class="theme-picker">
+    <div class="theme-dot active" style="background: #e70078;" onclick="setTheme('#e70078')"></div>
+    <div class="theme-dot" style="background: #6956CA;" onclick="setTheme('#6956CA')"></div>
+    <div class="theme-dot" style="background: #2e6fef;" onclick="setTheme('#2e6fef')"></div>
+    <div class="theme-dot" style="background: #ff6b35;" onclick="setTheme('#ff6b35')"></div>
+  </div>
+
+  <!-- TEST PANEL TOGGLE -->
+  <button class="toggle-panel" onclick="togglePanel()">// test panel</button>
 
   <!-- INTERCOM TEST PANEL -->
   <div class="test-panel" id="testPanel">
-    <h3>Intercom Test Controls</h3>
+    <h3>// Intercom Test Controls</h3>
     <div class="test-panel-grid">
       <div>
         <label>App ID</label>

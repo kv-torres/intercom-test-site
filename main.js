@@ -66,20 +66,57 @@ function openMessenger() {
   }
 }
 
+// Product Tours
+function startProductTour() {
+  if (window.Intercom) {
+    Intercom('startTour', 1);
+    Intercom('trackEvent', 'product-tour-started', { tour: 'default' });
+  } else {
+    alert("Intercom is not loaded yet.");
+  }
+}
+
+function startCustomTour() {
+  var tourId = document.getElementById('tour_id').value;
+  if (!tourId) {
+    alert("Enter a Tour ID first.");
+    return;
+  }
+  if (window.Intercom) {
+    Intercom('startTour', parseInt(tourId, 10));
+    Intercom('trackEvent', 'product-tour-started', { tour_id: tourId });
+  } else {
+    alert("Intercom is not loaded yet.");
+  }
+}
+
+// Theme Picker
+function setTheme(color) {
+  document.documentElement.style.setProperty('--accent', color);
+  var glow = color + '66';
+  document.documentElement.style.setProperty('--accent-glow', glow);
+
+  document.querySelectorAll('.theme-dot').forEach(function(dot) {
+    dot.classList.remove('active');
+    if (dot.style.background === color || dot.style.backgroundColor === color) {
+      dot.classList.add('active');
+    }
+  });
+}
+
+// Test Panel Toggle
 function togglePanel() {
   document.getElementById('testPanel').classList.toggle('open');
 }
 
-// Load Visitor by default
-window.addEventListener("load", loadVisitor);
-
+// Boot/Update from form
 function bootFromForm() {
-  const app_id = document.getElementById("form_app_id").value;
-  const user_id = document.getElementById("form_user_id").value;
-  const email = document.getElementById("form_email").value;
+  var app_id = document.getElementById("form_app_id").value;
+  var user_id = document.getElementById("form_user_id").value;
+  var email = document.getElementById("form_email").value;
 
-  const settings = {
-    app_id,
+  var settings = {
+    app_id: app_id,
     api_base: "https://api-iam.intercom.io"
   };
 
@@ -88,8 +125,7 @@ function bootFromForm() {
 
   bootIntercom(settings);
 
-  // Show messenger after a short delay
-  setTimeout(() => {
+  setTimeout(function() {
     if (window.Intercom) {
       Intercom('show');
     }
@@ -97,13 +133,13 @@ function bootFromForm() {
 }
 
 function updateFromForm() {
-  const user_id = document.getElementById("form_user_id").value;
-  const email = document.getElementById("form_email").value;
+  var user_id = document.getElementById("form_user_id").value;
+  var email = document.getElementById("form_email").value;
 
   if (window.Intercom) {
     Intercom('update', {
-      user_id,
-      email
+      user_id: user_id,
+      email: email
     });
     Intercom('show');
     alert("User updated via Intercom!");
@@ -111,3 +147,6 @@ function updateFromForm() {
     alert("Intercom is not loaded yet. Try booting first.");
   }
 }
+
+// Load Visitor by default
+window.addEventListener("load", loadVisitor);
