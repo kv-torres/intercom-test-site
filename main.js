@@ -54,10 +54,20 @@ function shutdown() {
 function triggerEvent() {
   if (window.Intercom) {
     Intercom('trackEvent', 'button-clicked', {
-      source: 'Pit Mode UI'
+      source: 'HLYBWH Site'
     });
     alert("Sample event sent to Intercom!");
   }
+}
+
+function openMessenger() {
+  if (window.Intercom) {
+    Intercom('show');
+  }
+}
+
+function togglePanel() {
+  document.getElementById('testPanel').classList.toggle('open');
 }
 
 // Load Visitor by default

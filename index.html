@@ -3,104 +3,423 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pit Mode 🐾</title>
+  <title>How Long You Been Wid Her?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #cce7ff, #e0f7ff);
-      color: #003366;
+      font-family: 'Inter', sans-serif;
+      background: #fdf6f0;
+      color: #2d2d2d;
+      min-height: 100vh;
+    }
+
+    /* --- NAV --- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: #fff;
+      border-bottom: 1px solid #f0e6dc;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #c2185b;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #c2185b; }
+
+    /* --- HERO --- */
+    .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 2rem;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background: linear-gradient(180deg, #fff 0%, #fdf6f0 100%);
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      color: #003366;
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      color: #1a1a1a;
+      line-height: 1.1;
+      max-width: 700px;
     }
 
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin: 2rem 0;
-    }
+    .hero h1 span { color: #c2185b; }
 
-    button {
-      background-color: #0074cc;
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      font-size: 1rem;
-      border-radius: 30px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #005fa3;
-    }
-
-    p {
+    .hero p {
+      margin-top: 1.5rem;
       font-size: 1.2rem;
-      color: #004080;
-      text-align: center;
-      max-width: 600px;
+      color: #666;
+      max-width: 520px;
+      line-height: 1.7;
     }
 
-    footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #666;
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: #c2185b;
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #a01448;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #c2185b;
+      border: 2px solid #c2185b;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: #c2185b;
+      color: #fff;
+    }
+
+    /* --- FEATURES --- */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 4rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
       text-align: center;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      color: #1a1a1a;
+    }
+
+    .feature-card p {
+      color: #777;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* --- TESTIMONIAL --- */
+    .testimonial {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: #fff;
+    }
+
+    .testimonial blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    .testimonial cite {
+      display: block;
+      margin-top: 1.5rem;
+      font-style: normal;
+      color: #999;
+      font-size: 0.95rem;
+    }
+
+    /* --- CTA SECTION --- */
+    .cta-section {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #c2185b, #e91e63);
+      color: #fff;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: #c2185b;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .btn-white:hover { transform: translateY(-2px); }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1a1a1a;
+      color: #888;
+      font-size: 0.85rem;
+    }
+
+    footer a { color: #c2185b; text-decoration: none; }
+
+    /* --- INTERCOM TEST PANEL (hidden by default) --- */
+    .test-panel {
+      display: none;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      padding: 2rem 3rem;
+      border-top: 3px solid #c2185b;
+    }
+
+    .test-panel.open { display: block; }
+
+    .test-panel h3 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .test-panel-grid {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .test-panel label {
+      display: block;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .test-panel input {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      width: 200px;
+    }
+
+    .test-panel input:focus {
+      outline: none;
+      border-color: #c2185b;
+    }
+
+    .test-btn {
+      background: #333;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .test-btn:hover {
+      background: #c2185b;
+      border-color: #c2185b;
+    }
+
+    .toggle-panel {
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      background: #1a1a1a;
+      color: #888;
+      border: 1px solid #333;
+      padding: 8px 14px;
+      font-size: 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 999;
+      transition: all 0.2s;
+    }
+
+    .toggle-panel:hover {
+      background: #c2185b;
+      color: #fff;
+      border-color: #c2185b;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .features { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .test-panel-grid { flex-direction: column; }
+      .test-panel input { width: 100%; }
     }
   </style>
 </head>
 <body>
 
-  <h1>Pit Mode 🐾</h1>
-  <p>Click a button below to test how Intercom behaves for each mode.</p>
+  <!-- NAV -->
+  <nav>
+    <div class="logo">HLYBWH</div>
+    <ul class="nav-links">
+      <li><a href="#features">How It Works</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-  <form id="intercomForm" style="margin-top: 2rem; text-align: center;">
-  <label>
-    App ID:
-    <input type="text" id="form_app_id" value="ex23qz7s" />
-  </label>
-  <br /><br />
-  <label>
-    User ID:
-    <input type="text" id="form_user_id" />
-  </label>
-  <br /><br />
-  <label>
-    Email:
-    <input type="email" id="form_email" />
-  </label>
-  <br /><br />
-  <button type="button" onclick="bootFromForm()">Boot</button>
-  <button type="button" onclick="updateFromForm()">Update</button>
-</form>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>How Long You Been <span>Wid Her?</span></h1>
+    <p>The place to get real about relationships, situationships, and everything in between. No judgment. Just honesty.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="openMessenger()">Talk To Us</button>
+      <button class="btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Learn More</button>
+    </div>
+  </section>
 
-  <div class="buttons">
-    <button onclick="loadVisitor()">Visitor</button>
-    <button onclick="loadUser()">User</button>
-    <button onclick="shutdown()">Shutdown</button>
-    <button onclick="triggerEvent()">Events</button>
-  </div>
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="feature-card">
+      <div class="feature-icon">&#128172;</div>
+      <h3>Anonymous Confessions</h3>
+      <p>Share your story without the worry. Our community keeps it real and keeps it private.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#128338;</div>
+      <h3>Timeline Calculator</h3>
+      <p>Track the overlap. See the math. Sometimes the dates just don't add up.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#129505;</div>
+      <h3>Support Circle</h3>
+      <p>Connect with others who've been through it. Healing is better together.</p>
+    </div>
+  </section>
 
+  <!-- TESTIMONIAL -->
+  <section class="testimonial" id="stories">
+    <blockquote>"I finally got the clarity I needed. Turns out, the math wasn't mathing for a reason."</blockquote>
+    <cite>&mdash; Anonymous, Member since 2024</cite>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <h2>Ready to Find Out?</h2>
+    <p>Start a conversation. We're here for you.</p>
+    <button class="btn-white" onclick="openMessenger()">Chat With Us</button>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    Built by Karla for Intercom testing 💬 | Diesel & Vinny 🐶
+    &copy; 2025 How Long You Been Wid Her? &mdash; Built with <a href="#">love and accountability</a>.
   </footer>
 
-  <!-- Load external JavaScript -->
-  <script src="main.js"></script>
+  <!-- INTERCOM TEST PANEL TOGGLE -->
+  <button class="toggle-panel" onclick="togglePanel()">Test Panel</button>
 
+  <!-- INTERCOM TEST PANEL -->
+  <div class="test-panel" id="testPanel">
+    <h3>Intercom Test Controls</h3>
+    <div class="test-panel-grid">
+      <div>
+        <label>App ID</label>
+        <input type="text" id="form_app_id" value="ex23qz7s" />
+      </div>
+      <div>
+        <label>User ID</label>
+        <input type="text" id="form_user_id" />
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" id="form_email" />
+      </div>
+      <button class="test-btn" onclick="bootFromForm()">Boot</button>
+      <button class="test-btn" onclick="updateFromForm()">Update</button>
+      <button class="test-btn" onclick="loadVisitor()">Visitor</button>
+      <button class="test-btn" onclick="loadUser()">User</button>
+      <button class="test-btn" onclick="shutdown()">Shutdown</button>
+      <button class="test-btn" onclick="triggerEvent()">Event</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
